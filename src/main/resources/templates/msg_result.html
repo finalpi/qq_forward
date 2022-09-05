@@ -91,7 +91,7 @@
                     }
                 }
                 console.log(theRequest)
-                axios.get('http://127.0.0.1:8017/api/getByHash?hash='+theRequest.hash)
+                axios.get('http://106.52.115.216:8017/api/getByHash?hash='+theRequest.hash)
                     .then(function (response) {
                         console.log(response)
                         that.message = response.data
