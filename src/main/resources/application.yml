@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://106.52.115.216:3306/qq2tg
+    username: root
+    password: 123456
+server:
+  port: 8017
