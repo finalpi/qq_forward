@@ -62,7 +62,7 @@
                         if ("text" == messageElement.type){
                             result = result + messageElement.text
                         }else if ("image" == messageElement.type){
-                            result = result + "<img src=\"http://127.0.0.1:8017/api/forward?url="+ messageElement.url +"\"  />"
+                            result = result + "<img src=\"http://106.52.115.216:8017/api/forward?url="+ messageElement.url +"\"  />"
                         }else if ("xml" == messageElement.type){
                             result = " <button type=\"button\" οnclick='getMore('"+ JSON.stringify(messageElement.data) +"')'>查看更多合并消息</button>"
                         }
