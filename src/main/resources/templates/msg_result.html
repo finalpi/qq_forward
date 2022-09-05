@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-main>
+            <div style="padding-bottom: 40px">
+                <el-button type="primary" @click="reStart()">重置消息</el-button>
+            </div>
+            <div class="block">
+                <el-timeline>
+                    <el-timeline-item v-for="item in message" :timestamp="timestampParse(item.time)" placement="top">
+                        <el-card>
+                            <h4>{{"("+item.user_id+")  "}} {{item.nickname}}</h4>
+                            <p v-html="getMessage(item.message)" v-if="item.message[0].type!='xml'"></p>
+                            <el-button type="primary" v-else @click="getMore(item.message[0].data)">查看更多合并消息</el-button>
+                        </el-card>
+                    </el-timeline-item>
+                </el-timeline>
+            </div>
+        </el-main>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: [
+                    {
+                        "time":1662372246,
+                        "user_id":704762157,
+                        "nickname":"final π",
+                        "message":[
+                            {
+                                "type":"text",
+                                "text":"文字"
+                            }
+                        ],
+                        "raw_message":"文字"
+                    },
+                    {
+                        "time":1662372258,
+                        "user_id":704762157,
+                        "nickname":"final π",
+                        "message":[
+                            {
+                                "type":"xml",
+                                "data":[
+                                    {
+                                        "time":1662349304,
+                                        "user_id":704762157,
+                                        "nickname":"final π",
+                                        "message":[
+                                            {
+                                                "type":"xml",
+                                                "data":[
+                                                    {
+                                                        "time":1662208444,
+                                                        "user_id":2248482827,
+                                                        "nickname":"稳住还有一年就能润了加油",
+                                                        "message":[
+                                                            {
+                                                                "type":"text",
+                                                                "text":"是不需要对说的话负责的"
+                                                            }
+                                                        ],
+                                                        "raw_message":"是不需要对说的话负责的"
+                                                    },
+                                                    {
+                                                        "time":1662208467,
+                                                        "user_id":2248482827,
+                                                        "nickname":"稳住还有一年就能润了加油",
+                                                        "message":[
+                                                            {
+                                                                "type":"text",
+                                                                "text":"中国媒体等于某国政客"
+                                                            }
+                                                        ],
+                                                        "raw_message":"中国媒体等于某国政客"
+                                                    },
+                                                    {
+                                                        "time":1662208489,
+                                                        "user_id":2248482827,
+                                                        "nickname":"稳住还有一年就能润了加油",
+                                                        "message":[
+                                                            {
+                                                                "type":"text",
+                                                                "text":"媒体说话就当放屁乐一乐就行了"
+                                                            }
+                                                        ],
+                                                        "raw_message":"媒体说话就当放屁乐一乐就行了"
+                                                    }
+                                                ],
+                                                "id":35
+                                            }
+                                        ],
+                                        "raw_message":"[xml消息]"
+                                    },
+                                    {
+                                        "time":1662372243,
+                                        "user_id":704762157,
+                                        "nickname":"final π",
+                                        "message":[
+                                            {
+                                                "type":"image",
+                                                "file":"3ac349d0d6dab2b0a158087ab9fc28c621373-256-301.jpg",
+                                                "url":"https://c2cpicdw.qpic.cn/offpic_new/0//505279464-64884938-3AC349D0D6DAB2B0A158087AB9FC28C6/0",
+                                                "asface":false
+                                            },
+                                            {
+                                                "type":"text",
+                                                "text":"图片文字"
+                                            }
+                                        ],
+                                        "raw_message":"[图片]图片文字"
+                                    },
+                                    {
+                                        "time":1662372245,
+                                        "user_id":704762157,
+                                        "nickname":"final π",
+                                        "message":[
+                                            {
+                                                "type":"image",
+                                                "file":"3ac349d0d6dab2b0a158087ab9fc28c621373-256-301.jpg",
+                                                "url":"https://c2cpicdw.qpic.cn/offpic_new/0//505279464-4078763948-3AC349D0D6DAB2B0A158087AB9FC28C6/0",
+                                                "asface":false
+                                            }
+                                        ],
+                                        "raw_message":"[图片]"
+                                    },
+                                    {
+                                        "time":1662372246,
+                                        "user_id":704762157,
+                                        "nickname":"final π",
+                                        "message":[
+                                            {
+                                                "type":"text",
+                                                "text":"文字"
+                                            }
+                                        ],
+                                        "raw_message":"文字"
+                                    }
+                                ],
+                                "id":35
+                            }
+                        ],
+                        "raw_message":"[xml消息]"
+                    }
+                ],
+                oldmsg:[]
+            },
+            methods:{
+                timestampParse(time){
+                    let date = new Date(time * 1000)
+                    let year = date.getFullYear()
+                    let mouth = date.getMonth() + 1
+                    let day = date.getDate()
+                    let h =date.getHours()
+                    if (h < 10){
+                        h = '0' + h
+                    }
+                    let min = date.getMinutes()
+                    if (min < 10){
+                        min = '0' + min
+                    }
+                    let s = date.getSeconds()
+                    if (s < 10){
+                        s = '0' + s
+                    }
+                    return year + '/' + mouth + '/' + day + " " + h + ":" + min + ":" + s
+                },
+                getMessage(message){
+                    let result = ""
+                    for (let messageElement of message) {
+                        if ("text" == messageElement.type){
+                            result = result + messageElement.text
+                        }else if ("image" == messageElement.type){
+                            result = result + "<img src=\"http://127.0.0.1:8017/api/forward?url="+ messageElement.url +"\"  />"
+                        }else if ("xml" == messageElement.type){
+                            result = " <button type=\"button\" οnclick='getMore('"+ JSON.stringify(messageElement.data) +"')'>查看更多合并消息</button>"
+                        }
+                    }
+                    return result
+                },
+                getMore(msg){
+                    if (this.oldmsg == ''){
+                        this.oldmsg = this.message
+                    }
+                    this.message = msg
+                },
+                reStart(){
+                    this.message = this.oldmsg
+                },
+            },
+            mounted(){
+                let that = this
+                var url = location.search; //获取url中"?"符后的字串
+                var theRequest = new Object();
+                if (url.indexOf("?") != -1) {
+                    var str = url.substr(1);
+                    strs = str.split("&");
+                    for(var i = 0; i < strs.length; i ++) {
+                        theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+                    }
+                }
+                console.log(theRequest)
+                axios.get('http://127.0.0.1:8017/api/getByHash?hash='+theRequest.hash)
+                    .then(function (response) {
+                        that.message = response
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        })
+    </script>
+</body>
+</html>
