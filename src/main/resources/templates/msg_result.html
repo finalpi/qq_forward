@@ -32,126 +32,7 @@
             el: '#app',
             data: {
                 message: [
-                    {
-                        "time":1662372246,
-                        "user_id":704762157,
-                        "nickname":"final π",
-                        "message":[
-                            {
-                                "type":"text",
-                                "text":"文字"
-                            }
-                        ],
-                        "raw_message":"文字"
-                    },
-                    {
-                        "time":1662372258,
-                        "user_id":704762157,
-                        "nickname":"final π",
-                        "message":[
-                            {
-                                "type":"xml",
-                                "data":[
-                                    {
-                                        "time":1662349304,
-                                        "user_id":704762157,
-                                        "nickname":"final π",
-                                        "message":[
-                                            {
-                                                "type":"xml",
-                                                "data":[
-                                                    {
-                                                        "time":1662208444,
-                                                        "user_id":2248482827,
-                                                        "nickname":"稳住还有一年就能润了加油",
-                                                        "message":[
-                                                            {
-                                                                "type":"text",
-                                                                "text":"是不需要对说的话负责的"
-                                                            }
-                                                        ],
-                                                        "raw_message":"是不需要对说的话负责的"
-                                                    },
-                                                    {
-                                                        "time":1662208467,
-                                                        "user_id":2248482827,
-                                                        "nickname":"稳住还有一年就能润了加油",
-                                                        "message":[
-                                                            {
-                                                                "type":"text",
-                                                                "text":"中国媒体等于某国政客"
-                                                            }
-                                                        ],
-                                                        "raw_message":"中国媒体等于某国政客"
-                                                    },
-                                                    {
-                                                        "time":1662208489,
-                                                        "user_id":2248482827,
-                                                        "nickname":"稳住还有一年就能润了加油",
-                                                        "message":[
-                                                            {
-                                                                "type":"text",
-                                                                "text":"媒体说话就当放屁乐一乐就行了"
-                                                            }
-                                                        ],
-                                                        "raw_message":"媒体说话就当放屁乐一乐就行了"
-                                                    }
-                                                ],
-                                                "id":35
-                                            }
-                                        ],
-                                        "raw_message":"[xml消息]"
-                                    },
-                                    {
-                                        "time":1662372243,
-                                        "user_id":704762157,
-                                        "nickname":"final π",
-                                        "message":[
-                                            {
-                                                "type":"image",
-                                                "file":"3ac349d0d6dab2b0a158087ab9fc28c621373-256-301.jpg",
-                                                "url":"https://c2cpicdw.qpic.cn/offpic_new/0//505279464-64884938-3AC349D0D6DAB2B0A158087AB9FC28C6/0",
-                                                "asface":false
-                                            },
-                                            {
-                                                "type":"text",
-                                                "text":"图片文字"
-                                            }
-                                        ],
-                                        "raw_message":"[图片]图片文字"
-                                    },
-                                    {
-                                        "time":1662372245,
-                                        "user_id":704762157,
-                                        "nickname":"final π",
-                                        "message":[
-                                            {
-                                                "type":"image",
-                                                "file":"3ac349d0d6dab2b0a158087ab9fc28c621373-256-301.jpg",
-                                                "url":"https://c2cpicdw.qpic.cn/offpic_new/0//505279464-4078763948-3AC349D0D6DAB2B0A158087AB9FC28C6/0",
-                                                "asface":false
-                                            }
-                                        ],
-                                        "raw_message":"[图片]"
-                                    },
-                                    {
-                                        "time":1662372246,
-                                        "user_id":704762157,
-                                        "nickname":"final π",
-                                        "message":[
-                                            {
-                                                "type":"text",
-                                                "text":"文字"
-                                            }
-                                        ],
-                                        "raw_message":"文字"
-                                    }
-                                ],
-                                "id":35
-                            }
-                        ],
-                        "raw_message":"[xml消息]"
-                    }
+
                 ],
                 oldmsg:[]
             },
@@ -212,7 +93,8 @@
                 console.log(theRequest)
                 axios.get('http://127.0.0.1:8017/api/getByHash?hash='+theRequest.hash)
                     .then(function (response) {
-                        that.message = response
+                        console.log(response)
+                        that.message = response.data
                     })
                     .catch(function (error) {
                         console.log(error);
