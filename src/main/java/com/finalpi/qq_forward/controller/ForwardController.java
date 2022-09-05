@@ -70,7 +70,6 @@ public class ForwardController {
     @ResponseBody
     public ResponseEntity<Resource> forward(@RequestParam Map<String,String> param){
         String url = param.get("url");
-        System.out.println("Start: ------------------------->");
         Resource resource = null;
         InputStream inputStream;
         try {
@@ -98,7 +97,6 @@ public class ForwardController {
 
                 byteArrayOutputStream.write(bytes, 0, n);
             }
-            System.out.println(byteArrayOutputStream.size());
         } catch (Exception e) {
 
             e.printStackTrace();
