@@ -1,6 +1,6 @@
 package com.finalpi.qq_forward.controller;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.finalpi.qq_forward.bean.Forward;
 import com.finalpi.qq_forward.bean.ForwardParam;
@@ -38,7 +38,7 @@ public class ForwardController {
             throw new RuntimeException("找不到对应的消息");
         }
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("forward",JSON.parseArray(forward.getJson()));
+        modelAndView.addObject("forward", JSON.parseArray(forward.getJson()));
         modelAndView.setViewName("msg_result");
         return modelAndView;
     }
